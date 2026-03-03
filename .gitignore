@@ -1,0 +1,25 @@
+# .NET
+backend/**/bin/
+backend/**/obj/
+backend/**/*.user
+
+# Angular
+admin-panel/node_modules/
+admin-panel/dist/
+
+# Flutter
+mobile-app/.dart_tool/
+mobile-app/build/
+mobile-app/.flutter-plugins
+mobile-app/.flutter-plugins-dependencies
+mobile-app/android/app/google-services.json
+mobile-app/ios/GoogleService-Info.plist
+
+# VS Code
+.vscode/
+*.suo
+*.user
+
+# OS
+.DS_Store
+Thumbs.db
