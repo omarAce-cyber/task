@@ -53,13 +53,14 @@ public class NotificationService : INotificationService
             });
         }
 
-        // Also send to "all" topic as a fallback
-        if (!devices.Any())
+        // Also send to "all" topic as a fallback when no devices are registered or all device-token sends failed
+        if (!devices.Any() || !overallSuccess)
         {
-            overallSuccess = await _fcmService.SendToAllDevicesAsync(title, body);
+            var topicSuccess = await _fcmService.SendToAllDevicesAsync(title, body);
+            overallSuccess = overallSuccess || topicSuccess;
         }
 
-        notification.IsSent = overallSuccess || !devices.Any();
+        notification.IsSent = overallSuccess;
         await _notificationRepository.UpdateAsync(notification);
 
         return notification;

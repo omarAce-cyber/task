@@ -41,7 +41,11 @@ export class SendNotificationComponent {
     this.notificationService.sendNotification(request).subscribe({
       next: (response) => {
         this.loading = false;
-        this.successMessage = 'Notification sent successfully!';
+        if (response?.data?.isSent) {
+          this.successMessage = 'Notification sent successfully!';
+        } else {
+          this.errorMessage = response?.message || 'Notification was saved but could not be delivered. Please check your Firebase configuration.';
+        }
         this.title = '';
         this.body = '';
       },

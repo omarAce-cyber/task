@@ -27,7 +27,9 @@ public class NotificationController : ControllerBase
 
         return Ok(new ApiResponse<Notification>
         {
-            Message = "Notification sent successfully.",
+            Message = result.IsSent
+                ? "Notification sent successfully."
+                : "Notification was saved but could not be delivered. Please check your Firebase configuration.",
             Data = result
         });
     }
